@@ -1,7 +1,12 @@
 var app = require('express').createServer();
 
 app.get('/ping', function(req, res){
-	res.send('OK');
+	res.write('Got your request \n');
+	res.write('Your number in Q is 8. Wait for response ... \n');
+	setTimeout(function(){
+		res.write('Here we are! \n');
+		res.end();
+}, 10000);
 });
 
 
