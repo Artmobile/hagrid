@@ -10,9 +10,11 @@ var TestWorker = function(args){
 					function(item, next){
 						// Publish item next in line
 						onData(item.toString());
+						next();
 					},
 					function(){
 						// Signal that we have finished
+						console.log("Worker done");
 						done();
 					});
 			}
