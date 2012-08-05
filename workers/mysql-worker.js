@@ -1,7 +1,8 @@
 var MySQLExecuter = function(args){
+	
+function Preved(){
 
-	this.args = args;
-
+}
 	return {	
 		exec: function(onData, onError, done){
 			var mysql      = require('mysql');
@@ -11,7 +12,7 @@ var MySQLExecuter = function(args){
 			  user     	: 'root',
 			  password : 'sa',
 			});
-			
+			Preved();
 			connection.connect();
 			//console.log("successfuly connected to mysql");
 			connection.query(args, function(err, rows, fields) {
@@ -25,7 +26,9 @@ var MySQLExecuter = function(args){
 			});
 			connection.end();
 		}
-	}
+	} //end return
+
+
 }
 
 // Hook into commonJS module systems
