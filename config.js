@@ -4,7 +4,8 @@ var Config = {
 	T1_PORT : process.env.PORT || 3000,
 	WORKERS:{
 		SQL: {
-			PREFETCH_COUNT:1
+			PREFETCH_COUNT:1,
+			SRC:'mysql-worker.js'
 		},
 		WS: {
 			PREFETCH_COUNT:1000

@@ -1,0 +1,3 @@
+web: node lib/T1/server.js
+worker: node --debug lib/T3/server.js SQL
+inspector: node-inspector
