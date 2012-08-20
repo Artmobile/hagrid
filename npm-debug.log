@@ -1,0 +1,244 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'contextify' ]
+2 info using npm@1.1.49
+3 info using node@v0.8.7
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose read json C:\git_wa\Xodiac\hagrid\package.json
+6 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\amqp\package.json
+7 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\async\package.json
+8 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\crypto\package.json
+9 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\express\package.json
+10 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\mysql\package.json
+11 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\nodemon\package.json
+12 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\request\package.json
+13 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\underscore\package.json
+14 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\xml2js\package.json
+15 verbose from cache C:\git_wa\Xodiac\hagrid\package.json
+16 verbose readDependencies using package.json deps
+17 verbose cache add [ 'contextify', null ]
+18 silly cache add name=undefined spec="contextify" args=["contextify",null]
+19 verbose parsed url { pathname: 'contextify',
+19 verbose parsed url   path: 'contextify',
+19 verbose parsed url   href: 'contextify' }
+20 silly lockFile e90e8b6a-contextify contextify
+21 verbose lock contextify C:\Documents and Settings\michaelse\Application Data\npm-cache\e90e8b6a-contextify.lock
+22 silly lockFile e90e8b6a-contextify contextify
+23 verbose addNamed [ 'contextify', '' ]
+24 verbose addNamed [ null, '' ]
+25 silly lockFile 902bbeb2-contextify contextify@
+26 verbose lock contextify@ C:\Documents and Settings\michaelse\Application Data\npm-cache\902bbeb2-contextify.lock
+27 silly addNameRange { name: 'contextify', range: '', hasData: false }
+28 verbose url raw contextify
+29 verbose url resolving [ 'https://registry.npmjs.org/', './contextify' ]
+30 verbose url resolved https://registry.npmjs.org/contextify
+31 info retry registry request attempt 1 at 17:16:32
+32 verbose etag "1349XRZMKO7W21MPBJBZXI2NM"
+33 http GET https://registry.npmjs.org/contextify
+34 http 304 https://registry.npmjs.org/contextify
+35 silly registry.get cb [ 304,
+35 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+35 silly registry.get     etag: '"1349XRZMKO7W21MPBJBZXI2NM"',
+35 silly registry.get     date: 'Mon, 20 Aug 2012 14:16:35 GMT',
+35 silly registry.get     'content-length': '0' } ]
+36 verbose etag contextify from cache
+37 silly addNameRange number 2 { name: 'contextify', range: '', hasData: true }
+38 silly addNameRange versions [ 'contextify',
+38 silly addNameRange   [ '0.0.2',
+38 silly addNameRange     '0.0.3',
+38 silly addNameRange     '0.0.4',
+38 silly addNameRange     '0.0.5',
+38 silly addNameRange     '0.0.6',
+38 silly addNameRange     '0.0.7',
+38 silly addNameRange     '0.1.0',
+38 silly addNameRange     '0.1.1',
+38 silly addNameRange     '0.1.2',
+38 silly addNameRange     '0.1.3' ] ]
+39 verbose addNamed [ 'contextify', '0.1.3' ]
+40 verbose addNamed [ '0.1.3', '0.1.3' ]
+41 silly lockFile 7770d4b3-contextify-0-1-3 contextify@0.1.3
+42 verbose lock contextify@0.1.3 C:\Documents and Settings\michaelse\Application Data\npm-cache\7770d4b3-contextify-0-1-3.lock
+43 verbose read json C:\Documents and Settings\michaelse\Application Data\npm-cache\contextify\0.1.3\package\package.json
+44 silly lockFile 7770d4b3-contextify-0-1-3 contextify@0.1.3
+45 silly lockFile 902bbeb2-contextify contextify@
+46 silly resolved [ { name: 'contextify',
+46 silly resolved     version: '0.1.3',
+46 silly resolved     description: 'Turn an object into a persistent execution context.',
+46 silly resolved     author: { name: 'Brian McDaniel', email: 'brianmcd05@gmail.com' },
+46 silly resolved     contributors: [ [Object] ],
+46 silly resolved     keywords: [ 'context', 'vm' ],
+46 silly resolved     repository:
+46 silly resolved      { type: 'git',
+46 silly resolved        url: 'https://github.com/brianmcd/contextify.git' },
+46 silly resolved     main: './lib/contextify',
+46 silly resolved     scripts: { test: 'nodeunit test/', install: 'node-gyp rebuild' },
+46 silly resolved     engines: { node: '>=0.4.0' },
+46 silly resolved     licenses: [ [Object] ],
+46 silly resolved     dependencies: { bindings: '*' },
+46 silly resolved     devDependencies: { nodeunit: '>=0.5.x' },
+46 silly resolved     gypfile: true,
+46 silly resolved     readme: '# Contextify\n\nTurn an object into a V8 execution context.  A contextified object acts as the global \'this\' when executing scripts in its context.  Contextify adds 3 methods to the contextified object: run(code, filename), getGlobal(), and dispose().  The main difference between Contextify and Node\'s vm methods is that Contextify allows asynchronous functions to continue executing in the Contextified object\'s context.  See vm vs. Contextify below for more discussion.\n\n## Examples\n```javascript\nvar Contextify = require(\'contextify\');\nvar sandbox = { console : console, prop1 : \'prop1\'};\nContextify(sandbox);\nsandbox.run(\'console.log(prop1);\');\nsandbox.dispose(); // free the resources allocated for the context.\n```\n\n```javascript\nvar sandbox = Contextify(); // returns an empty contextified object.\nsandbox.run(\'var x = 3;\');\nconsole.log(sandbox.x); // prints 3\nsandbox.dispose();\n```\n\n```javascript\nvar sandbox = Contextify({setTimeout : setTimeout});\nsandbox.run("setTimeout(function () { x = 3; }, 5);");\nconsole.log(sandbox.x); // prints undefined\nsetTimeout(function () {\n    console.log(sandbox.x); // prints 3\n    sandbox.dispose();\n}, 10);\n```\n## Details\n\n**Contextify([sandbox])**\n\n    sandbox - The object to contextify, which will be modified as described below\n              If no sandbox is specified, an empty object will be allocated and used instead.\n\n    Returns the contextified object.  It doesn\'t make a copy, so if you already have a reference\n    to the sandbox, you don\'t need to catch the return value.\n\nA Contextified object has 2 methods added to it:\n\n**run(code, [filename])**\n\n    code - string containing JavaScript to execute\n    filename  - an optional filename for debugging.\n\n    Runs the code in the Contextified object\'s context.\n\n**getGlobal()**\n\nReturns the actual global object for the V8 context.  The global object is initialized with interceptors (discussed below) which forward accesses on it to the contextified object.  This means the contextified object acts like the global object in most cases.  Sometimes, though, you need to make a reference to the actual global object.\n\nFor example:\n\n```javascript\nvar window = Contextify({console : console});\nwindow.window = window;\nwindow.run("console.log(window === this);");\n// prints false.\n```\n\n```javascript\nvar window = Contextify({console : console});\nwindow.window = window.getGlobal();\nwindow.run("console.log(window === this);");\n// prints true\n```\n\nThe global object returned by getGlobal() can be treated like the contextified sandbox object, except that defining getters/setters will not work on it.  Define getters and setters on the actual sandbox object instead.\n\n**dispose()**\n\nFrees the memory allocated for the underlying V8 context.  If you don\'t call this when you\'re done, the V8 context memory will leak, as will the sandbox memory, since the context\'s global stores a strong reference to the sandbox object.  You can still use your sandbox object after calling dispose(), but it\'s unsafe to use a global previously returned from getGlobal().  run, getGlobal, and dispose will be removed from the sandbox object.\n\n## Install\n\n    npm install contextify\n\n## require(\'vm\') vs. Contextify\n\nNode\'s vm functions (runInContext etc) work by copying the values from the sandbox object onto a context\'s global object, executing the passed in script, then copying the results back.  This means that scripts that create asynchronous functions (using mechanisms like setTimeout) won\'t have see the results of executing those functions, since the copying in/out only occurs during an explicit call to runInContext and friends.  \n\nContextify creates a V8 context, and uses interceptors (see: http://code.google.com/apis/v8/embed.html#interceptors) to forward global object accesses to the sandbox object.  This means there is no copying in or out, so asynchronous functions have the expected effect on the sandbox object.  \n\n## Tests\n\nTesting is done with nodeunit.  Run the tests with\n\n    nodeunit test/\n\nOutput: \n\n    OK: 92 assertions (27ms)\n\n\n## Building\n\n    node-waf configure build\n\n## Acknowledgments\n\nInspiration taken from Assaf\'s Zombie.js context solution: https://github.com/assaf/zombie\n',
+46 silly resolved     _id: 'contextify@0.1.3',
+46 silly resolved     _from: 'contextify' } ]
+47 info install contextify@0.1.3 into C:\git_wa\Xodiac\hagrid
+48 info installOne contextify@0.1.3
+49 verbose from cache C:\Documents and Settings\michaelse\Application Data\npm-cache\contextify\0.1.3\package\package.json
+50 info C:\git_wa\Xodiac\hagrid\node_modules\contextify unbuild
+51 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\contextify\package.json
+52 verbose tar unpack C:\Documents and Settings\michaelse\Application Data\npm-cache\contextify\0.1.3\package.tgz
+53 silly lockFile 64ed6f09-c-hagrid-node-modules-contextify C:\git_wa\Xodiac\hagrid\node_modules\contextify
+54 verbose lock C:\git_wa\Xodiac\hagrid\node_modules\contextify C:\Documents and Settings\michaelse\Application Data\npm-cache\64ed6f09-c-hagrid-node-modules-contextify.lock
+55 silly gunzTarPerm modes [ '777', '666' ]
+56 silly gunzTarPerm extractEntry package.json
+57 silly gunzTarPerm extractEntry .npmignore
+58 silly gunzTarPerm extractEntry README.md
+59 silly gunzTarPerm extractEntry binding.gyp
+60 silly gunzTarPerm extractEntry changelog
+61 silly gunzTarPerm extractEntry lib/contextify.js
+62 silly gunzTarPerm extractEntry LICENSE.txt
+63 silly gunzTarPerm extractEntry src/contextify.cc
+64 silly gunzTarPerm extractEntry test/contextify.js
+65 silly gunzTarPerm extractEntry wscript
+66 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\contextify\package.json
+67 silly lockFile 64ed6f09-c-hagrid-node-modules-contextify C:\git_wa\Xodiac\hagrid\node_modules\contextify
+68 info preinstall contextify@0.1.3
+69 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\package.json
+70 verbose readDependencies using package.json deps
+71 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\package.json
+72 verbose readDependencies using package.json deps
+73 verbose cache add [ 'bindings@*', null ]
+74 silly cache add name=undefined spec="bindings@*" args=["bindings@*",null]
+75 verbose parsed url { pathname: 'bindings@*',
+75 verbose parsed url   path: 'bindings@*',
+75 verbose parsed url   href: 'bindings@*' }
+76 silly cache add name="bindings" spec="*" args=["bindings","*"]
+77 verbose parsed url { pathname: '*', path: '*', href: '*' }
+78 verbose addNamed [ 'bindings', '*' ]
+79 verbose addNamed [ null, '' ]
+80 silly lockFile a3858fc2-bindings bindings@*
+81 verbose lock bindings@* C:\Documents and Settings\michaelse\Application Data\npm-cache\a3858fc2-bindings.lock
+82 silly addNameRange { name: 'bindings', range: '', hasData: false }
+83 verbose url raw bindings
+84 verbose url resolving [ 'https://registry.npmjs.org/', './bindings' ]
+85 verbose url resolved https://registry.npmjs.org/bindings
+86 info retry registry request attempt 1 at 17:16:36
+87 verbose etag "155J65ZWP82F62RN6TCU16KAE"
+88 http GET https://registry.npmjs.org/bindings
+89 http 304 https://registry.npmjs.org/bindings
+90 silly registry.get cb [ 304,
+90 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+90 silly registry.get     etag: '"155J65ZWP82F62RN6TCU16KAE"',
+90 silly registry.get     date: 'Mon, 20 Aug 2012 14:16:37 GMT',
+90 silly registry.get     'content-length': '0' } ]
+91 verbose etag bindings from cache
+92 silly addNameRange number 2 { name: 'bindings', range: '', hasData: true }
+93 silly addNameRange versions [ 'bindings',
+93 silly addNameRange   [ '0.0.1',
+93 silly addNameRange     '0.1.0',
+93 silly addNameRange     '0.1.1',
+93 silly addNameRange     '0.2.0',
+93 silly addNameRange     '0.2.1',
+93 silly addNameRange     '0.2.2',
+93 silly addNameRange     '0.2.3',
+93 silly addNameRange     '0.2.4',
+93 silly addNameRange     '0.3.0',
+93 silly addNameRange     '0.4.0',
+93 silly addNameRange     '1.0.0' ] ]
+94 verbose addNamed [ 'bindings', '1.0.0' ]
+95 verbose addNamed [ '1.0.0', '1.0.0' ]
+96 silly lockFile f01e5454-bindings-1-0-0 bindings@1.0.0
+97 verbose lock bindings@1.0.0 C:\Documents and Settings\michaelse\Application Data\npm-cache\f01e5454-bindings-1-0-0.lock
+98 verbose read json C:\Documents and Settings\michaelse\Application Data\npm-cache\bindings\1.0.0\package\package.json
+99 silly lockFile f01e5454-bindings-1-0-0 bindings@1.0.0
+100 silly lockFile a3858fc2-bindings bindings@*
+101 silly resolved [ { name: 'bindings',
+101 silly resolved     description: 'Helper module for loading your native module\'s bindings',
+101 silly resolved     keywords: [ 'native', 'addon', 'bindings', 'gyp', 'waf' ],
+101 silly resolved     version: '1.0.0',
+101 silly resolved     author:
+101 silly resolved      { name: 'Nathan Rajlich',
+101 silly resolved        email: 'nathan@tootallnate.net',
+101 silly resolved        url: 'http://tootallnate.net' },
+101 silly resolved     repository:
+101 silly resolved      { type: 'git',
+101 silly resolved        url: 'git://github.com/TooTallNate/node-bindings.git' },
+101 silly resolved     main: './bindings.js',
+101 silly resolved     engines: { node: '*' },
+101 silly resolved     readme: 'node-bindings\n=============\n### Helper module for loading your native module\'s bindings\n\nThis is a helper module for authors of Node.js native addon modules. In node >=\n0.7.0, it is encouraged to statically precompile your native addons for your\nvarious supported platforms and architectures, rather than depend on your users\nto do that. This adds two new burdens on the developer that we now need to\nconsider while writing our module:\n\n 1. You now have to compile the bindings yourself, before publishing the module.\n 2. You now have to figure out which version of the bindings to load at runtime.\n\n`node-bindings` attempts to solve probelm `#2`.\n\nThis module solves the organizational problem of how to store these bindings\nfiles with a simple directory convention:\n\n```\n<module_root>/compiled/<node_version>/<platform>/<arch>/bindings.node\n```\n\nSo for example, on a 32-bit Windows platform, running node `v0.6.9`, the\n`bindings.node` file should be placed in:\n\n```\n<module_root>/compiled/0.6/win32/ia32/bindings.node\n```\n\nOn 64-bit Mac OS X, running node `v0.7.1`, then the bindings file should be\nplaced in:\n\n```\n<module_root>/compiled/0.7/darwin/x64/bindings.node\n```\n\nFor reference, the calculations for the various parts that makes up the require\npath are:\n\n * `<module_root>` - The directory where `package.json` is found is the root.\n * `<platform>` - `process.platform`\n * `<arch>` - `process.arch`\n * `<node_version>` - `parseFloat(process.versions.node)`\n\nThe default "compiled" directory is `compiled` and the default name of every\n"bindings" file is `bindings.node`. This is configurable if you\'d like.\n\n\nInstallation\n------------\n\nInstall with `npm`:\n\n``` bash\n$ npm install bindings\n```\n\n\nExample\n-------\n\n`require()`ing the proper bindings file for the current node version, platform\nand architecture is as simple as:\n\n``` js\nvar bindings = require(\'bindings\')()\n\n// Use your bindings defined in your C files\nbindings.your_c_function()\n```\n\nYou can specify the name of the bindings file if you desire:\n\n``` js\nvar bindings = require(\'bindings\')(\'my_bindings\')\n```\n\nOr you can pass in an options Object for full configuration:\n\n\n``` js\nvar bindings = require(\'bindings\')({\n    bindings: \'my_bindings\'\n  , compiled: \'builddir\'\n})\n```\n\nNice Error Output\n-----------------\n\n```\nError: Could not load the bindings file. Tried:\n -> /Users/nrajlich/node-ffi/out/Debug/ffi_bindings.node\n -> /Users/nrajlich/node-ffi/Debug/ffi_bindings.node\n -> /Users/nrajlich/node-ffi/out/Release/ffi_bindings.node\n -> /Users/nrajlich/node-ffi/Release/ffi_bindings.node\n -> /Users/nrajlich/node-ffi/compiled/0.6/darwin/x64/ffi_bindings.node\n -> /Users/nrajlich/node-ffi/build/Release/ffi_bindings.node\n -> /Users/nrajlich/node-ffi/build/default/ffi_bindings.node\n    at bindings (/Users/nrajlich/node-ffi/node_modules/bindings/bindings.js:80:13)\n    at Object.<anonymous> (/Users/nrajlich/node-ffi/lib/ffi.js:3:34)\n    at Module._compile (module.js:441:26)\n    at Object..js (module.js:459:10)\n    at Module.load (module.js:348:31)\n    at Function._load (module.js:308:12)\n    ...\n```\n\nLicense\n-------\n\n(The MIT License)\n\nCopyright (c) 2012 Nathan Rajlich &lt;nathan@tootallnate.net&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+101 silly resolved     _id: 'bindings@1.0.0',
+101 silly resolved     _from: 'bindings@*' } ]
+102 info install bindings@1.0.0 into C:\git_wa\Xodiac\hagrid\node_modules\contextify
+103 info installOne bindings@1.0.0
+104 verbose from cache C:\Documents and Settings\michaelse\Application Data\npm-cache\bindings\1.0.0\package\package.json
+105 info C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings unbuild
+106 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings\package.json
+107 verbose tar unpack C:\Documents and Settings\michaelse\Application Data\npm-cache\bindings\1.0.0\package.tgz
+108 silly lockFile a6b14b30-contextify-node-modules-bindings C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings
+109 verbose lock C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings C:\Documents and Settings\michaelse\Application Data\npm-cache\a6b14b30-contextify-node-modules-bindings.lock
+110 silly gunzTarPerm modes [ '777', '666' ]
+111 silly gunzTarPerm extractEntry package.json
+112 silly gunzTarPerm extractEntry README.md
+113 silly gunzTarPerm extractEntry bindings.js
+114 verbose read json C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings\package.json
+115 silly lockFile a6b14b30-contextify-node-modules-bindings C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings
+116 info preinstall bindings@1.0.0
+117 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings\package.json
+118 verbose readDependencies using package.json deps
+119 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings\package.json
+120 verbose readDependencies using package.json deps
+121 silly resolved []
+122 verbose about to build C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings
+123 info build C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings
+124 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\node_modules\bindings\package.json
+125 verbose linkStuff [ false,
+125 verbose linkStuff   false,
+125 verbose linkStuff   false,
+125 verbose linkStuff   'C:\\git_wa\\Xodiac\\hagrid\\node_modules\\contextify\\node_modules' ]
+126 info linkStuff bindings@1.0.0
+127 verbose linkBins bindings@1.0.0
+128 verbose linkMans bindings@1.0.0
+129 verbose rebuildBundles bindings@1.0.0
+130 info install bindings@1.0.0
+131 info postinstall bindings@1.0.0
+132 verbose about to build C:\git_wa\Xodiac\hagrid\node_modules\contextify
+133 info build C:\git_wa\Xodiac\hagrid\node_modules\contextify
+134 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\package.json
+135 verbose linkStuff [ false,
+135 verbose linkStuff   false,
+135 verbose linkStuff   false,
+135 verbose linkStuff   'C:\\git_wa\\Xodiac\\hagrid\\node_modules' ]
+136 info linkStuff contextify@0.1.3
+137 verbose linkBins contextify@0.1.3
+138 verbose linkMans contextify@0.1.3
+139 verbose rebuildBundles contextify@0.1.3
+140 verbose rebuildBundles [ 'bindings' ]
+141 info install contextify@0.1.3
+142 verbose unsafe-perm in lifecycle true
+143 silly exec cmd "/c" "node-gyp rebuild"
+144 silly cmd,/c,node-gyp rebuild,C:\git_wa\Xodiac\hagrid\node_modules\contextify spawning
+145 info contextify@0.1.3 Failed to exec install script
+146 info C:\git_wa\Xodiac\hagrid\node_modules\contextify unbuild
+147 verbose from cache C:\git_wa\Xodiac\hagrid\node_modules\contextify\package.json
+148 info preuninstall contextify@0.1.3
+149 info uninstall contextify@0.1.3
+150 verbose true,C:\git_wa\Xodiac\hagrid\node_modules,C:\git_wa\Xodiac\hagrid\node_modules unbuild contextify@0.1.3
+151 info postuninstall contextify@0.1.3
+152 error contextify@0.1.3 install: `node-gyp rebuild`
+152 error `cmd "/c" "node-gyp rebuild"` failed with 1
+153 error Failed at the contextify@0.1.3 install script.
+153 error This is most likely a problem with the contextify package,
+153 error not with npm itself.
+153 error Tell the author that this fails on your system:
+153 error     node-gyp rebuild
+153 error You can get their info via:
+153 error     npm owner ls contextify
+153 error There is likely additional logging output above.
+154 error System Windows_NT 5.1.2600
+155 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "contextify"
+156 error cwd C:\git_wa\Xodiac\hagrid
+157 error node -v v0.8.7
+158 error npm -v 1.1.49
+159 error code ELIFECYCLE
+160 verbose exit [ 1, true ]
