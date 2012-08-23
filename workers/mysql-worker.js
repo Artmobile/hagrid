@@ -13,7 +13,8 @@ var MySQLExecuter = function(args){
 			connection.connect();
 			//console.log("successfuly connected to mysql");
 			connection.query(args, function(err, rows, fields) {
-				connection.end();	
+				connection.end();
+				//console.log("My SQL error code - " + err.code + " message - "  + err.message);	
 				callback(rows, err);
 			}); //end of query
 		} //end of exec
